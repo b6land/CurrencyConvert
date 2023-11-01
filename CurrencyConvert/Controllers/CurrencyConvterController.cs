@@ -26,7 +26,9 @@ public class CurrencyConvertController : ControllerBase
     [HttpGet(Name = "GetCurrencyConvert")]
     public Currency Get(string source, string target, string amount)
     {
-        Converter conv = new Converter();
+        IExchange exchange = new ExampleExchange();
+        Converter conv = new Converter(exchange);
+        
         if(!conv.CheckCurrencyValid(source)){
             return new Currency{
                 msg = "fail, please correct source currency",
@@ -45,6 +47,7 @@ public class CurrencyConvertController : ControllerBase
                 amount = null
             };
         }
+
         decimal result = conv.CurrencyConvert(source, target, amount);
         return new Currency{
             msg = "success",

@@ -5,6 +5,16 @@ namespace CurrencyConvert.Logic;
 /// </summary>
 public class Converter
 {
+    IExchange _exchange;
+
+    /// <summary>
+    /// 建構方法
+    /// </summary>
+    /// <param name="exchange"> 匯率類別 </param>
+    public Converter(IExchange exchange){
+        _exchange = exchange;
+    }
+
     /// <summary>
     /// 檢查幣別是否有效
     /// </summary>
@@ -46,47 +56,7 @@ public class Converter
         target = target.ToUpper();
 
         // 依幣別決定倍率
-        switch(source){
-            case "USD":
-            switch(target){
-                case "USD":
-                    multiple = 1.0;
-                break;                
-                case "JPY":
-                    multiple = 111.801;
-                break;
-                case "TWD":
-                    multiple = 30.444;
-                break;
-            }
-            break;
-            case "JPY":
-            switch(target){
-                case "USD":
-                    multiple = 0.00885;
-                break;                
-                case "JPY":
-                    multiple = 1;
-                break;
-                case "TWD":
-                    multiple = 0.26956;
-                break;
-            }
-            break;
-            case "TWD":
-            switch(target){
-                case "USD":
-                    multiple = 0.03281;
-                break;                
-                case "JPY":
-                    multiple = 3.669;
-                break;
-                case "TWD":
-                    multiple = 1;
-                break;
-            }
-            break;
-        }
+        multiple = _exchange.GetMultiple(source, target);
         
         // 剖析與轉換
         amount = amount.Replace(",", "").Replace("$", "");
