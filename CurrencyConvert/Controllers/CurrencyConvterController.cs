@@ -30,19 +30,19 @@ public class CurrencyConvertController : ControllerBase
         if(!conv.CheckCurrencyValid(source)){
             return new Currency{
                 msg = "fail, please correct source currency",
-                amount = "0"
+                amount = null
             };
         }
         if(!conv.CheckCurrencyValid(target)){
             return new Currency{
                 msg = "fail, please correct target currency",
-                amount = "0"
+                amount = null
             };
         }
         if(!conv.CheckAmountValid(amount)){
             return new Currency{
                 msg = "fail, please correct amount",
-                amount = "0"
+                amount = null
             };
         }
         decimal result = conv.CurrencyConvert(source, target, amount);
