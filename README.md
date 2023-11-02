@@ -1,6 +1,7 @@
 ### 需要的 SDK
 
 請由此處下載：https://dotnet.microsoft.com/en-us/download/dotnet/7.0
+
 通常選擇最新版 SDK 7.x.xxx 的 Windows 版本 x64 installer 下載並安裝即可。
 
 ### 執行 WebAPI
